@@ -17,6 +17,7 @@
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
     <button
+        (click)="notificarVerVistaDetalle(data)"
         class="button expanded"
         [class.success]="data.state === 'selling'"
         [class.secondary]="data.state === 'sold'">
@@ -27,4 +28,5 @@
             Ver detalles
         </span>
     </button>
+
 </div>

@@ -58,8 +58,26 @@ export class ProductService {
         |   - Búsqueda por estado:                                         |
         |       state=x (siendo x el estado)                               |
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+        console.log("Entroooo",filter);
+        //q=x (siendo x el texto)
+        //category.id=x (siendo x el identificador de la categoría)
+
+
+        let urlSearchParameters: URLSearchParams = new URLSearchParams(`_sort=publishedDate&_order=DESC`)
+
+        let searchFilter = ``;
+        if(filter) {
+            if(filter.category) {
+                urlSearchParameters.append("category.id", filter.category);
+            }
+
+            if(filter.text){
+                urlSearchParameters.append("q", filter.text);
+            }
+        }
+        
         let options = new RequestOptions({
-            search: new URLSearchParams(`_sort=publishedDate&_order=DESC`)
+            search: urlSearchParameters
         });
 
         return this._http

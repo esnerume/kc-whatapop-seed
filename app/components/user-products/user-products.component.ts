@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from "@angular/core";
+import { Component, Input, OnChanges, OnDestroy, SimpleChanges, Output, EventEmitter } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { User } from "../../models/user";
@@ -18,6 +18,7 @@ export class UserProductsComponent extends ProductsCollectionComponent implement
 
     @Input() userId: number;
     @Input() currentProductId: number;
+    @Output() productChanged: EventEmitter<string> = new EventEmitter();
     user: User;
 
     ngOnInit(): void {
@@ -28,6 +29,7 @@ export class UserProductsComponent extends ProductsCollectionComponent implement
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes["currentProductId"] && changes["currentProductId"]["currentValue"]) {
+            this.productChanged.emit();
             super.ngOnInit();
         }
     }

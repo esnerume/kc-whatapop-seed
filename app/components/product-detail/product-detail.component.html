@@ -44,7 +44,7 @@
             *ngIf="_product.state === 'selling'"
             (click)="showPurchaseWarning()"
             class="button large expanded">Comprar por {{ _product.price | number:'1.2-2' }} €</button>
-        <user-products [userId] = "_product.seller.id" [currentProductId] = "_product.id"></user-products>
+        <user-products [userId] = "_product.seller.id" [currentProductId] = "_product.id" (productChanged)="productChanged()"></user-products>
         <button
             (click)="goBack()"
             class="warning button expanded">Volver</button>

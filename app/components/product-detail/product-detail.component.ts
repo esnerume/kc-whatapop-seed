@@ -27,12 +27,22 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
     ngOnInit(): void {
         this._route.data.forEach((data: { product: Product }) => this._product = data.product);
         if (typeof(Storage) !== "undefined") {
-            let lsProduct:string = localStorage.getItem(`${this._prefix}${this._product.id}`);
-            if(lsProduct && lsProduct == 'Me gusta') {
-                this.like = lsProduct;
-            }
+            this.setLikeStatus(this._product.id.toString());
         }
         window.scrollTo(0, 0);
+    }
+
+    private setLikeStatus(productId: string) {
+        let lsProduct:string = localStorage.getItem(`${this._prefix}${this._product.id.toString()}`);
+        if(lsProduct && lsProduct == 'Me gusta') {
+            this.like = lsProduct;
+        } else {
+            this.like = "¿ Te gusta ?";
+        }
+    }
+
+    productChanged(): void {
+        this.setLikeStatus(this._product.id.toString());
     }
 
     ngOnDestroy(): void {
@@ -65,6 +75,9 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
          }
     }
 
+    getLikeText(): string {;
+        return this.like;
+    }
 
     getImageSrc(): string {
         return this._product && this._product.photos.length > 0 ? this._product.photos[0] : "";

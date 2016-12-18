@@ -1,0 +1,11 @@
+<div class="user-products">
+    <div *ngIf="_products?.length > 0" class="small-up-2 medium-up-4 large-up-6">
+        <h3>Otros productos del mismo vendedor</h3>
+        <product
+            *ngFor="let product of _products"
+            [data]="product"
+            (verVistaDetalle)="vistaDetalleProducto($event)"
+            class="column">
+        </product>
+    </div>
+</div>

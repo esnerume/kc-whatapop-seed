@@ -73,6 +73,14 @@ export class ProductService {
             if(filter.state) {
                 urlSearchParameters.append("state", filter.state);
             }
+
+            if(filter.seller) {
+                urlSearchParameters.append("seller.id", filter.seller.toString());
+            }
+
+            if(filter.id) {
+                urlSearchParameters.append("id_ne", filter.id.toString());
+            }
         }
 
         let options = new RequestOptions({

@@ -14,12 +14,24 @@ import { ProductsCollectionComponent } from "../products-collection/products-col
 })
 
 
-export class UserProductsComponent extends ProductsCollectionComponent {
+export class UserProductsComponent extends ProductsCollectionComponent implements OnChanges{
 
     @Input() userId: number;
     @Input() currentProductId: number;
     user: User;
     constructor(private _productService: ProductService, private _router: Router) { super(_productService, _router)}
+
+    ngOnInit(): void {
+        // Dehabilitamos el init del componentePadre (sobrecargándolo) para llamarlo cuando sólo cuando hay un cambio (ngOnchanges)
+        // Si no implementamos el OnChanges y dejamos sólo el OnInit del Componente padre, solo funciona correctamente al recargar la pagina (Commnd + R)
+
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes["currentProductId"] && changes["currentProductId"]["currentValue"]) {
+            super.ngOnInit();
+        }
+    }
 
     filterCollection(filter: ProductFilter): void {
         let productsFilter : ProductFilter = { seller: this.userId, id: this.currentProductId};

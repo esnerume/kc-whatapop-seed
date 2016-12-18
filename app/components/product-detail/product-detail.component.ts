@@ -33,11 +33,13 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
     }
 
     private setLikeStatus(productId: string) {
-        let lsProduct:string = localStorage.getItem(`${this._prefix}${this._product.id.toString()}`);
-        if(lsProduct && lsProduct == 'Me gusta') {
-            this.like = lsProduct;
-        } else {
-            this.like = "¿ Te gusta ?";
+        if (typeof(Storage) !== "undefined") {
+            let lsProduct: string = localStorage.getItem(`${this._prefix}${this._product.id.toString()}`);
+            if (lsProduct && lsProduct == 'Me gusta') {
+                this.like = lsProduct;
+            } else {
+                this.like = "¿ Te gusta ?";
+            }
         }
     }
 
@@ -66,13 +68,17 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
     }
 
     toogleLike(): void {
-         if(this.like === "Me gusta") {
-             this.like = "¿ Te gusta ?";
-             localStorage.removeItem(`${this._prefix}${this._product.id}`);
-         } else {
-             this.like = "Me gusta";
-             localStorage.setItem( `${this._prefix}${this._product.id}`, this.like);
-         }
+        if (typeof(Storage) !== "undefined") {
+            if (this.like === "Me gusta") {
+                this.like = "¿ Te gusta ?";
+                localStorage.removeItem(`${this._prefix}${this._product.id}`);
+            } else {
+                this.like = "Me gusta";
+                localStorage.setItem(`${this._prefix}${this._product.id}`, this.like);
+            }
+        } else {
+            alert("Funcionalidad no disponible. Tu navegador no soporta localStorage");
+        }
     }
 
     getLikeText(): string {;

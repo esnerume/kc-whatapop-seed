@@ -4,4 +4,7 @@ export interface ProductFilter {
     state?: string;
     seller?: number;
     id?: number;
+    order?: string;
+    priceFrom? : number;
+    priceTo?: number;
 }

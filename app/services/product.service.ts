@@ -81,7 +81,39 @@ export class ProductService {
             if(filter.id) {
                 urlSearchParameters.append("id_ne", filter.id.toString());
             }
+
+            if(filter.priceFrom) {
+                urlSearchParameters.append("price_gte", filter.priceFrom.toString());
+            }
+
+            if(filter.priceTo) {
+                urlSearchParameters.append("price_lte", filter.priceTo.toString());
+            }
+
+            if(filter.order && filter.order!=="0") {
+                let typeOfOrder: string;
+                let orderBy: string;
+
+                if(filter.order === "1") {
+                    typeOfOrder = "ASC"
+                    orderBy="name";
+                }
+                else if(filter.order === "3") {
+                    typeOfOrder = "ASC"
+                    orderBy="price";
+                } else if(filter.order === "2"){
+                    typeOfOrder = "DESC"
+                    orderBy="name";
+                } else if(filter.order === "4"){
+                    typeOfOrder = "DESC";
+                    orderBy="price";
+
+                }
+                urlSearchParameters.set("_sort", orderBy);
+                urlSearchParameters.set("_order", typeOfOrder);
+            }
         }
+
 
         let options = new RequestOptions({
             search: urlSearchParameters

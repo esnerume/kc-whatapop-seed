@@ -15,6 +15,13 @@ export class ProductFilterComponent implements OnInit, OnDestroy {
     @Output() onSearch: EventEmitter<ProductFilter> = new EventEmitter();
     private _productFilter: ProductFilter = {};
     private _categories: Category[];
+    private _states: any [] = [{key: "En venta", value: "selling"},{key: "Vendido", value: "sold"}];
+    private _order: any [] = [{key: 'Ordenar por Defecto', value: "0"},
+                              {key: 'Ordenar Alfabeticamente Ascendente', value: "1"},
+                              {key: 'Ordenar Alfabeticamente Descendente', value: "2"},
+                              {key: 'Ordenar Precio Ascendente', value: '3'},
+                              {key: 'Ordenar Precio Descendente', value: '4'}]
+
     private _categoriesSubscription: Subscription;
 
     constructor(private _categoryService: CategoryService) { }

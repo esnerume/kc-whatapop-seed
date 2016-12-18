@@ -1,6 +1,14 @@
 <div class="row" *ngIf="_product">
     <div class="medium-4 columns">
         <img [src]="getImageSrc()" class="thumbnail" />
+        <button
+            class="icono"
+            (click)="toogleLike()">
+            <i class="fa"
+               [class.fa-thumbs-o-up]="like !== 'Me gusta'"
+               [class.fa-thumbs-up]="like === 'Me gusta'"
+               aria-hidden="true"></i> {{ like }}
+        </button>
     </div>
     <div class="medium-8 columns">
         <h3>{{ _product.name }}</h3>

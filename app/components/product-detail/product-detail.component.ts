@@ -15,6 +15,8 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
 
     private _product: Product;
     private _productSubscription: Subscription;
+    like: string = "¿ Te gusta ?";
+    private _prefix: string = "whatapop_";
 
     constructor(
         private _productService: ProductService,
@@ -24,6 +26,12 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
 
     ngOnInit(): void {
         this._route.data.forEach((data: { product: Product }) => this._product = data.product);
+        if (typeof(Storage) !== "undefined") {
+            let lsProduct:string = localStorage.getItem(`${this._prefix}${this._product.id}`);
+            if(lsProduct && lsProduct == 'Me gusta') {
+                this.like = lsProduct;
+            }
+        }
         window.scrollTo(0, 0);
     }
 
@@ -46,7 +54,18 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
             accept: () => this._router.navigate(["/product"])
         });
     }
-    
+
+    toogleLike(): void {
+         if(this.like === "Me gusta") {
+             this.like = "¿ Te gusta ?";
+             localStorage.removeItem(`${this._prefix}${this._product.id}`);
+         } else {
+             this.like = "Me gusta";
+             localStorage.setItem( `${this._prefix}${this._product.id}`, this.like);
+         }
+    }
+
+
     getImageSrc(): string {
         return this._product && this._product.photos.length > 0 ? this._product.photos[0] : "";
     }
@@ -61,4 +80,5 @@ export class ProductDetailComponent implements OnDestroy, OnInit {
     goBack(): void {
         window.history.back();
     }
+
 }

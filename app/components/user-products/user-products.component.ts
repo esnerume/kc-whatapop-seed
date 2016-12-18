@@ -19,7 +19,6 @@ export class UserProductsComponent extends ProductsCollectionComponent implement
     @Input() userId: number;
     @Input() currentProductId: number;
     user: User;
-    constructor(private _productService: ProductService, private _router: Router) { super(_productService, _router)}
 
     ngOnInit(): void {
         // Dehabilitamos el init del componentePadre (sobrecargándolo) para llamarlo cuando sólo cuando hay un cambio (ngOnchanges)

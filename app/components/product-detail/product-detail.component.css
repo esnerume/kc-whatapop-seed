@@ -9,6 +9,10 @@
     font-size: 28px;
 }
 
+.icono {
+    cursor: pointer;
+}
+
 .icono, .thumbnail {
     display: block;
     margin-left: auto;

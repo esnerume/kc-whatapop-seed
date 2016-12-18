@@ -26,7 +26,6 @@ export class SoldProductsResolve implements Resolve<Product []> {
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     constructor(private _productService: ProductService) {}
     resolve(ruta: ActivatedRouteSnapshot): Observable<Product[]> {
-        //return this._contactosService.obtenerContactos();
         let productsFilter : ProductFilter = { state: 'sold'}
         return this._productService.getProducts(productsFilter);
     }
